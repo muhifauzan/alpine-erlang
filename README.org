@@ -1,0 +1,19 @@
+* Erlang on Alpine Linux
+  This Dockerfile provides a full installation of Erlang on Alpine, intended for
+  running on CI with minimum dependency and it has no build tools installed. This
+  Dockerfile is almost identical with bitwalker/alpine-erlang with additional
+  Dialyzer. The caveat of course is if one has NIFs which require a native
+  compilation toolchain, but that is left as an exercise for the reader.
+* Usage
+  To boot straight to a prompt in the image:
+
+  #+BEGIN_SRC shell
+    $ docker run --rm -it muhifauzan/alpine-erlang erl
+    Erlang/OTP 20 [erts-9.0.1] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-thr
+    eads:10] [hipe] [kernel-poll:false]
+
+    Eshell V9.0.1  (abort with ^G)
+    1>
+    User switch command
+     --> q
+  #+END_SRC
