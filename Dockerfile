@@ -29,10 +29,11 @@ RUN mkdir -p $HOME && \
       openssl-dev \
       ncurses-dev \
       unixodbc-dev \
-      zlib-dev && \
+      zlib-dev \
+      openssh \
+      git && \
     # Install Erlang/OTP build deps
     apk add --no-cache --virtual .erlang-build \
-      git \
       autoconf \
       build-base \
       perl-dev && \
