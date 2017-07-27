@@ -16,14 +16,16 @@ ENV REFRESHED_AT=$REFRESHED_AT \
 
 WORKDIR /tmp/erlang-build
 
-# Create default user and home directory, set owner to default
-RUN mkdir -p $HOME && \
+RUN echo "//////////////////// Creating home directory /////" && \
+    mkdir -p $HOME && \
+    echo "//////////////////////// Adding default user /////" && \
     adduser -s /bin/sh -u 1001 -G root -h $HOME -S -D default && \
+    echo "///////// Setting home owner to default user /////" && \
     chown -R 1001:0 $HOME && \
-    # Add edge repos tagged so that we can selectively install edge packages
+    echo "/////////////////////////// Setting edge tag /////" && \
     echo "@edge http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk --update upgrade --no-cache && \
-    # Install Erlang/OTP deps
+    echo "//////////////// Installing Erlang/OTP deps  /////" && \
     apk add --no-cache pcre@edge \
       ca-certificates \
       openssl-dev \
@@ -32,18 +34,18 @@ RUN mkdir -p $HOME && \
       zlib-dev \
       openssh \
       git && \
-    # Install Erlang/OTP build deps
+    echo "////////// Installing Erlang/OTP build deps  /////" && \
     apk add --no-cache --virtual .erlang-build \
       autoconf \
       build-base \
       perl-dev && \
-    # Shallow clone Erlang/OTP
+    echo "/////////////// Shallow cloning Erlang/OTP   /////" && \
     git clone -b OTP-${ERLANG_VERSION} --single-branch --depth 1 https://github.com/erlang/otp.git . && \
-    # Erlang/OTP build env
+    echo "/////////// Setting Erlang/OTP env variable  /////" && \
     export ERL_TOP=/tmp/erlang-build && \
     export PATH=${ERL_TOP}/bin:${PATH} && \
     export CPPFlAGS="-D_BSD_SOURCE ${CPPFLAGS}" && \
-    # Configure
+    echo "///////////////////// Configuring Erlang/OTP /////" && \
     ./otp_build autoconf && \
     ./configure --prefix=/usr \
       --sysconfdir=/etc \
@@ -72,12 +74,13 @@ RUN mkdir -p $HOME && \
       --enable-shared-zlib \
       --enable-ssl=dynamic-ssl-lib \
       --enable-hipe && \
+    echo "/////////////////////// Compiling Erlang/OTP /////" && \
     make -j4 && make install && \
-    # Cleanup
+    echo "//////////////////////////////// Cleaning up /////" && \
     cd $HOME && \
     rm -rf /tmp/erlang-build && \
     apk del --force .erlang-build && \
-    # Update ca certificates
+    echo "//////////////////////////////// Updating CA /////" && \
     update-ca-certificates --fresh
 
 WORKDIR $HOME

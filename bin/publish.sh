@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 REPO=muhifauzan/alpine-erlang
 REFRESHED_AT=$(cat REFRESHED_AT)
