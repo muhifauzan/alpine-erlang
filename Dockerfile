@@ -7,7 +7,7 @@ FROM alpine:3.6
 ENV REFRESHED_AT=2017-07-31 \
     LANG=en_US.UTF-8 \
     HOME=/opt/app \
-    ERLANG_VERSION=20.0 \
+    ERLANG_VERSION=20.0.1 \
     # Set this so that CTRL+G works properly
     TERM=xterm
 ENV DIALYZER_PLT_PATH=${HOME}/.dialyzer_plt
