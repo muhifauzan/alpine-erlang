@@ -13,19 +13,19 @@ compilation toolchain, but that is left as an exercise for the reader.
 
 This image provide PLT that built against current Erlang/OTP version. The Erlang
 apps that were included are `erts`, `kernel`, `stdlib`, and `crypto`. The output
-file is `erlang-20.0.plt`. PLT file is stored in `DIALYZER_PLT_PATH` directory.
+file is `erlang-20.0.1.plt`. PLT file is stored in `DIALYZER_PLT_PATH` directory.
 
 
 # Usage
 
 To boot straight to a prompt in the image:
 
-``` shell
+```shell
 $ docker run --rm -it muhifauzan/alpine-erlang erl
-Erlang/OTP 20 [erts-9.0] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1
-0] [hipe] [kernel-poll:false]
+Erlang/OTP 20 [erts-9.0.1] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads
+:10] [hipe] [kernel-poll:false]
 
-Eshell V9.0  (abort with ^G)
+Eshell V9.0.1  (abort with ^G)
 1>
 User switch command
  --> q
