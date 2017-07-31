@@ -20,7 +20,7 @@ file is `erlang-20.0.plt`. PLT file is stored in `DIALYZER_PLT_PATH` directory.
 
 To boot straight to a prompt in the image:
 
-``` shell
+```shell
 $ docker run --rm -it muhifauzan/alpine-erlang erl
 Erlang/OTP 20 [erts-9.0] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1
 0] [hipe] [kernel-poll:false]
