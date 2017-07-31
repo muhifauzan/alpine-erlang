@@ -10,8 +10,8 @@ ENV REFRESHED_AT=2017-07-31 \
     ERLANG_VERSION=20.0 \
     # Set this so that CTRL+G works properly
     TERM=xterm
-ENV DIALYZER_PLT_PATH=${HOME}/.dialyzer_plt
-ENV DIALYZER_PLT=${DIALYZER_PLT_PATH}/erlang-${ERLANG_VERSION}.plt
+ENV DIALYZER_PLT_PATH=$HOME/.dialyzer_plt
+ENV DIALYZER_PLT=$DIALYZER_PLT_PATH/erlang-$ERLANG_VERSION.plt
 
 WORKDIR /tmp/erlang-build
 
@@ -39,11 +39,11 @@ RUN echo "//////////////////// Creating HOME directory /////" && \
       build-base \
       perl-dev && \
     echo "///////////////// Shallow cloning Erlang/OTP /////" && \
-    git clone -b OTP-${ERLANG_VERSION} --single-branch --depth 1 https://github.com/erlang/otp.git . && \
+    git clone -b OTP-$ERLANG_VERSION --single-branch --depth 1 https://github.com/erlang/otp.git . && \
     echo "//////////// Setting Erlang/OTP env variable /////" && \
     export ERL_TOP=/tmp/erlang-build && \
-    export PATH=${ERL_TOP}/bin:${PATH} && \
-    export CPPFlAGS="-D_BSD_SOURCE ${CPPFLAGS}" && \
+    export PATH=$ERL_TOP/bin:$PATH && \
+    export CPPFlAGS="-D_BSD_SOURCE $CPPFLAGS" && \
     echo "///////////////////// Configuring Erlang/OTP /////" && \
     ./otp_build autoconf && \
     ./configure --prefix=/usr \
